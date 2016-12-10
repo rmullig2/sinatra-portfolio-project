@@ -1,8 +1,8 @@
-class CreateContractss < ActiveRecord::Migration
+class CreateContracts < ActiveRecord::Migration
   def change
     create_table :contracts do |c|
-      t.integer :years
-      t.float :value
+      c.integer :years
+      c.float :value
     end
   end
 end
