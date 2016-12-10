@@ -7,6 +7,6 @@ describe 'User' do
 
   it 'has a secure password' do
     expect(@user.authenticate("dog")).to eq(false)
-    expect(@user.authenticate("test")).to eq(@user)
+    expect(@user.authenticate("password")).to eq(@user)
   end
 end
