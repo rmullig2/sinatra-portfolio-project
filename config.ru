@@ -7,7 +7,7 @@ if defined?(ActiveRecord::Migrator) && ActiveRecord::Migrator.needs_migration?
 end
 
 use Rack::MethodOverride
-#use PlayersController
+use PlayerController
 use TeamController
 use UserController
 run ApplicationController
