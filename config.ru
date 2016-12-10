@@ -8,6 +8,6 @@ end
 
 use Rack::MethodOverride
 #use PlayersController
-#use TeamsController
+use TeamController
 use UserController
 run ApplicationController
