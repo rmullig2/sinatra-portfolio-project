@@ -12,6 +12,8 @@ class UserController < ApplicationController
       redirect to '/signup'
     elsif params[:last_name].empty?
       redirect to '/signup'
+    elsif params[:user_name].empty?
+      redirect to '/signup'
     else
       redirect to '/'
     end
