@@ -18,7 +18,8 @@ ActiveRecord::Schema.define(version: 5) do
   end
 
   create_table "players", force: :cascade do |t|
-    t.string "name"
+    t.string  "name"
+    t.integer "rank"
   end
 
   create_table "predictions", force: :cascade do |t|

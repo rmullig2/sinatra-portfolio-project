@@ -130,9 +130,8 @@ user = { :first_name => "Super", :last_name => "User", :user_name => "Admin",
          :password => "pasword123" }
   u = User.new(user)
   u.save
-end
 
-players_list = {
+players_list = [
     { :name => "Yoenis Cespedes",
       :rank => 1
     },
@@ -283,7 +282,7 @@ players_list = {
     { :name => "Derek Holland",
       :rank => 50
     }
-}
+]
 
 players_list.each do |player|
   p = Player.new(player)
