@@ -7,8 +7,14 @@ class UserController < ApplicationController
   end
   
   post '/signup' do
-    binding.pry
-    erb :'/main'
+    #binding.pry
+    if params[:first_name].empty?
+      redirect to '/signup'
+    elsif params[:last_name].empty?
+      redirect to '/signup'
+    else
+      redirect to '/'
+    end
   end
 
 end

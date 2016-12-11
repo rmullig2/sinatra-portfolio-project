@@ -17,8 +17,30 @@ describe UserController do
         :password => "GoYankees"
       }
       post '/signup', params
-      expect(last_response.location).to include("/main")
+      expect(last_response.location).to include("/")
     end
+    
+    it 'does not create a user without a first name' do
+      params = {
+        :first_name => "",
+        :last_name => "Preller",
+        :user_name => "apreller",
+        :password => "PadsGM"
+      }
+      post '/signup', params
+      expect(last_response.location).to include("/signup")
+    end
+    
+    it 'does not create a user without a last name' do
+      params = {
+        :first_name => "A.J.",
+        :last_name => "",
+        :user_name => "apreller",
+        :password => "PadsGM"
+      }
+      post '/signup', params
+      expect(last_response.location).to include("/signup")
+    end   
     
   end
   
