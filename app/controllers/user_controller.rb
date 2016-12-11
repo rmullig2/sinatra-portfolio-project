@@ -7,6 +7,7 @@ class UserController < ApplicationController
   end
   
   post '/signup' do
+    binding.pry
     erb :'/main'
   end
 
