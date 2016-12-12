@@ -11,7 +11,7 @@ class UserController < ApplicationController
      if valid_user?
         User.create(params)
         session[:id] = User.last.id
-        binding.pry
+        #binding.pry
         redirect to '/'
      else
        redirect to '/signup'
@@ -24,12 +24,18 @@ class UserController < ApplicationController
   end
   
   post '/login' do
-    binding.pry
     if logged_in?
+      #binding.pry
       redirect to '/users/params[:user_name]'
     else
       redirect to '/login'
     end
+  end
+  
+  get '/users/:user_name' do
+    @user = User.find_by params[:id]
+    #binding.pry
+    erb :'/users/home'
   end
 
 end

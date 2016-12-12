@@ -53,6 +53,7 @@ class ApplicationController < Sinatra::Base
         false
       else
         session[:fail] = ""
+        session[:id] = user.id
         true
       end
     end
