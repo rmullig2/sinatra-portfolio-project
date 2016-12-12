@@ -47,8 +47,10 @@ class ApplicationController < Sinatra::Base
       if params[:user_name].empty?
         session[:fail] = "Please specify user name"
         false
-      elsif
-        @user.authenticate(params[:password]) == false
+      elsif @user.nil?
+        session[:fail] = "User name does not exist"
+        false
+      elsif @user.authenticate(params[:password]) == false
         session[:fail] = "Incorrect password"
         false
       else

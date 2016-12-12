@@ -10,3 +10,14 @@
 <% preds.each do |p| %>
 <%= p[:rank]%>. <%= p[:name] %> - <%= p[:team] %>: <%= p.years %> years/$<%= p.value %>
 <% end %>
+<br><br>
+<h3>Predict more signings</h3>
+<form action="/users/@user.user_name" method="post">
+    <input id="hidden" type="hidden" name="_method" value="patch">
+    <select name = "player_name">
+      <% Player.each do |p| %>
+      <option value="<%= p.name %>"><% p.name %></option>
+      <% end %>
+    </select>
+    <input type="submit" value="Predict">
+</form>
