@@ -25,6 +25,11 @@ class UserController < ApplicationController
   
   post '/login' do
     binding.pry
+    if logged_in?
+      redirect to '/users/params[:user_name]'
+    else
+      redirect to '/login'
+    end
   end
 
 end

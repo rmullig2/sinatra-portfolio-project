@@ -42,6 +42,21 @@ class ApplicationController < Sinatra::Base
       end
     end
     
+    def logged_in?
+      user = User.find_by user_name: params[:user_name]
+      if params[:user_name].empty?
+        session[:fail] = "Please specify user name"
+        false
+      elsif
+        user.authenticate(params[:password]) == false
+        session[:fail] = "Incorrect password"
+        false
+      else
+        session[:fail] = ""
+        true
+      end
+    end
+    
   end
 
 end
