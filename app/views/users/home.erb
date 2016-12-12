@@ -1,1 +1,12 @@
 <h2><%= @user.first_name %> <%= @user.last_name%></h2>
+<% preds = [] %>
+<% @user.predictions.each do |p| %>
+<%   player = Player.find_by p.player_id %>
+<%   contract = Contract.find_by p.contract_id %>
+<%   team = Team.find_by p.team_id %>
+<%   preds << { :rank => player.rank, :name => player.name, :team => team.name, :years => contract.years, :value => contract.value} %>
+<% end %>
+<% preds.sort_by! { |pred| pred[:rank] } %>
+<% preds.each do |p| %>
+<%= p[:rank]%>. <%= p[:name] %> - <%= p[:team] %>: <%= p.years %> years/$<%= p.value %>
+<% end %>

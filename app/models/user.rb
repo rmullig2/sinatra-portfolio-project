@@ -5,4 +5,4 @@ class User < ActiveRecord::Base
   
   validates :first_name, :last_name, :user_name, :password, presence: true
   
-  end
+end
