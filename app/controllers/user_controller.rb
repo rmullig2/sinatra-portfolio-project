@@ -9,10 +9,10 @@ class UserController < ApplicationController
   
   post '/signup' do
      if valid_user?
-        User.create(params)
+        @user = User.create(params)
         session[:id] = User.last.id
         #binding.pry
-        redirect to '/'
+        redirect to "/users/#{@user.user_name}"
      else
        redirect to '/signup'
      end
