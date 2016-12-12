@@ -52,6 +52,17 @@ describe UserController do
       post '/signup', params
       expect(last_response.location).to include("/signup")
     end
+
+    it 'does not create a user without a password' do
+      params = {
+        :first_name => "A.J.",
+        :last_name => "Preller",
+        :user_name => "apreller",
+        :password => ""
+      }
+      post '/signup', params
+      expect(last_response.location).to include("/signup")
+    end
   end
   
 end
