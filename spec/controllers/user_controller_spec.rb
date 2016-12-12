@@ -96,6 +96,36 @@ describe UserController do
       get '/login'
       expect(last_response.status).to eq(200)
     end
+    
+    it 'allows user to login with correct password' do
+      User.create(:first_name => "Brian", :last_name => "Cashman",
+                  :user_name => "bcashman", :password => "GoYankees")
+      visit 'login'
+      fill_in(:user_name, :with => "bcashman")
+      fill_in(:password, :with => "GoYankees")
+      click_button 'Login'
+      expect(page.current_path).to include("/users/bcashman")
+    end
+    
+    it 'does not allow user to login without specifying password' do
+      User.create(:first_name => "Brian", :last_name => "Cashman",
+                  :user_name => "bcashman", :password => "GoYankees")
+      visit 'login'
+      fill_in(:user_name, :with => "")
+      fill_in(:password, :with => "GoYankees")
+      click_button 'Login'
+      expect(page.current_path).to include("/login")
+    end
+    
+    it 'does not allow user to login with an incorrect password' do
+      User.create(:first_name => "Brian", :last_name => "Cashman",
+                  :user_name => "bcashman", :password => "GoYankees")
+      visit 'login'
+      fill_in(:user_name, :with => "bcashman")
+      fill_in(:password, :with => "goyankees")
+      click_button 'Login'
+      expect(page.current_path).to include("/login")
+    end
 
   end
 
