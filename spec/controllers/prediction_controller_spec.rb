@@ -1,4 +1,10 @@
-teams_list = [
+require 'spec_helper'
+
+describe PredictionController do
+  
+  User.create(:first_name => "Brian", :last_name => "Cashman",
+                  :user_name => "bcashman", :password => "GoYankees")
+  teams_list = [
     { :name => "Baltimore Orioles",
       :league => "American",
       :division => "East"
@@ -120,13 +126,12 @@ teams_list = [
       :division => "West"
     }
   ]
-
-teams_list.each do |team|
-  Team.find_or_create_by(team)
-end
-
-
-players_list = [
+  
+  teams_list.each do |team|
+    Team.find_or_create_by(team)
+  end
+  
+  players_list = [
     { :name => "Yoenis Cespedes",
       :rank => 1
     },
@@ -283,7 +288,4 @@ players_list.each do |player|
   Player.find_or_create_by(player)
 end
 
-user = { :first_name => "Super", :last_name => "User", :user_name => "Admin",
-         :password => "pasword123" }
-
-User.find_or_create_by(user)
+end
