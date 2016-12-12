@@ -1,8 +1,3 @@
-<% if !@failure_message.empty? %>
-    <div id="fail" style="border: 2px solid green;">
-        <%= @failure_message %>
-    </div>
-<% end %>
 <h1>Create your account</h1>
 <form action="/signup" method="post">
     <label>First Name</label>
@@ -15,3 +10,8 @@
     <input type="password" name="password"></br>
     <input type="submit" name="Create Account">
 </form>
+<% if !@failure_message.empty? %>
+    <div id="fail" style="border: 2px solid green;">
+        <%= @failure_message %>
+    </div>
+<% end %>

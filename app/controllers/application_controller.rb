@@ -12,7 +12,7 @@ class ApplicationController < Sinatra::Base
   end
   
   get '/' do
-#    binding.pry
+    #binding.pry
     session[:fail] = ""
     erb :index
   end
