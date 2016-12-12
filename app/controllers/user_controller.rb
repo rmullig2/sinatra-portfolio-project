@@ -15,10 +15,13 @@ class UserController < ApplicationController
       #binding.pry
       redirect to '/signup'
     elsif params[:last_name].empty?
+      session[:fail] = "Please specify last name"
       redirect to '/signup'
     elsif params[:user_name].empty?
+      session[:fail] = "Please specify login name"
       redirect to '/signup'
     elsif params[:password].empty?
+      session[:fail] = "Please specify password"
       redirect to '/signup'
     else
       session[:fail] = ""
