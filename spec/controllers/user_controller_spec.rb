@@ -20,6 +20,17 @@ describe UserController do
       expect(last_response.location).to include("/")
     end
     
+    it 'successful signup creates a new user in database' do
+      params = {
+        :first_name => "Brian",
+        :last_name => "Cashman",
+        :user_name => "bcashman",
+        :password => "GoYankees"
+      }
+      post '/signup', params
+      expect(User.last.user_name).to eq("bcashman")
+    end
+    
     it 'does not create a user without a first name' do
       params = {
         :first_name => "",
@@ -47,6 +58,19 @@ describe UserController do
         :first_name => "A.J.",
         :last_name => "Preller",
         :user_name => "",
+        :password => "PadsGM"
+      }
+      post '/signup', params
+      expect(last_response.location).to include("/signup")
+    end
+    
+    it 'does not create a user if the user name exists' do
+      User.create(:first_name => "Brian", :last_name => "Cashman",
+                  :user_name => "bcashman", :password => "GoYankees")
+      params = {
+        :first_name => "A.J.",
+        :last_name => "Preller",
+        :user_name => "bcashman",
         :password => "PadsGM"
       }
       post '/signup', params

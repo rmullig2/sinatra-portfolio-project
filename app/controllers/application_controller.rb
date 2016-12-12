@@ -18,7 +18,9 @@ class ApplicationController < Sinatra::Base
   end
   
   helpers do
+    
     def valid_user?
+      user = User.find_by user_name: params[:user_name]
       if params[:first_name].empty?
         session[:fail] = "Please specify first name"
         false
@@ -28,6 +30,9 @@ class ApplicationController < Sinatra::Base
       elsif params[:user_name].empty?
         session[:fail] = "Please specify login name"
         false
+      elsif user != nil
+        session[:fail] = "That user name has already been selected"
+        false
       elsif params[:password].empty?
         session[:fail] = "Please specify password"
         false
@@ -36,6 +41,7 @@ class ApplicationController < Sinatra::Base
         true
       end
     end
+    
   end
 
 end
