@@ -15,4 +15,9 @@ class UserController < ApplicationController
      end
   end
 
+  get '/login/?' do
+    @failure_message = session[:fail] || @failure_message = ""
+    erb :'/users/login'
+  end
+
 end

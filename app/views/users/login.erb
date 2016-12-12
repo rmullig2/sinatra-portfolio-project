@@ -1,0 +1,13 @@
+<h1>Login to your account</h1>
+<form action="/login" method="post">
+    <label>Login name</label>
+    <input type="text" name="user_name"><br>
+    <label>Password</label>
+    <input type="password" name="password"></br>
+    <input type="submit" name="Create Account">
+</form>
+<% if !@failure_message.empty? %>
+    <div id="fail" style="border: 2px solid green;">
+        <%= @failure_message %>
+    </div>
+<% end %>

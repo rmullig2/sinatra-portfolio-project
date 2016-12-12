@@ -63,6 +63,17 @@ describe UserController do
       post '/signup', params
       expect(last_response.location).to include("/signup")
     end
+
   end
+
+  describe "Login Page" do
+
+    it 'loads the login page' do
+      get '/login'
+      expect(last_response.status).to eq(200)
+    end
+
+  end
+
   
 end
