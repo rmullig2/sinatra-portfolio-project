@@ -1,13 +1,34 @@
-<h2><%= @user.first_name %> <%= @user.last_name%></h2>
+<h2>Modify your predictions, <%= @user.first_name %> <%= @user.last_name%></h2>
 <% @user.predictions.each do |p| %>
 <%   player = Player.find_by id: p.player_id %>
 <%   contract = Contract.find_by id: p.contract_id %>
 <%   team = Team.find_by id: p.team_id %>
-<%=  player.rank %>. <%=player.name %> - <%= team.name %>: <%= contract.years %> years, $<%= contract.value %>
+<!-- <%=  player.rank %>. <%=player.name %> - <%= team.name %>: <%= contract.years %> years, $<%= contract.value %> -->
 <br>
 
 <form action="/users/<%= @user.user_name %>/modify" method="post">
     <input id="hidden" type="hidden" name="_method" value="patch">
-    
+    <%   player = Player.find_by id: p.player_id %>
+    <%   contract = Contract.find_by id: p.contract_id %>
+    <%   team = Team.find_by id: p.team_id %>
+    <input type="text" name="player_name" value="<%= player.name %>" readonly />
+    <select name="team_name" required>
+        <% Team.order(:name).each do |t| %>
+            <option value="<%= t.name %>"
+            <% if t.id == p.team_id %>
+                selected
+            <% end %>><%= t.name %>
+        <% end %>
+        </option>
+    </select>
+    <select name="years">
+        <% for i in 1..12 %>
+            <option value=<%=i%>
+            <% if i == contract.years %>
+                selected
+            <% end %>><%= i %>
+        <% end %>
+    </select>
+    <input type="text" name="value" size="5" value="<%= contract.value %>" />
 </form>
 <% end %>
