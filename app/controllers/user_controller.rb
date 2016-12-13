@@ -26,7 +26,11 @@ class UserController < ApplicationController
   post '/login' do
     if logged_in?
       session[:id] = @user.id
-      redirect to "/users/#{@user.user_name}"
+      if session[:id] == 1
+        redirect to "/admin/home"
+      else
+        redirect to "/users/#{@user.user_name}"
+      end
     else
       redirect to '/login'
     end
