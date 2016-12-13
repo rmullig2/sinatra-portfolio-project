@@ -17,8 +17,18 @@ class PredictionController < ApplicationController
   
   get '/users/:user_name/modify' do
     @user = User.find_by id: session[:id]
-    #binding.pry
     erb :'/predictions/modify'
+  end
+  
+  patch '/users/:user_name/modify' do
+    @user = User.find_by id: session[:id]
+    prediction = @user.predictions.select {|p| p[:id] == params[:prediction_id].to_i }[0]
+    team = Team.find_by name: params[:team_name]
+    Prediction.update(prediction.id, :team_id => team.id)
+    contract = Contract.find_by id: prediction.contract_id
+    Contract.update(contract.id, :years => params[:years], :value => params[:value])
+    binding.pry
+    redirect to "/users/#{@user.user_name}"
   end
   
 end

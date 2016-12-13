@@ -8,6 +8,7 @@
 
 <form action="/users/<%= @user.user_name %>/modify" method="post">
     <input id="hidden" type="hidden" name="_method" value="patch">
+    <input type="hidden" name="prediction_id" value="<%= p.id %>" />
     <%   player = Player.find_by id: p.player_id %>
     <%   contract = Contract.find_by id: p.contract_id %>
     <%   team = Team.find_by id: p.team_id %>
@@ -30,5 +31,6 @@
         <% end %>
     </select>
     <input type="text" name="value" size="5" value="<%= contract.value %>" />
+    <input type="submit" value="Change">
 </form>
 <% end %>

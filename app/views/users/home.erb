@@ -17,7 +17,7 @@
       <% taken = [] %>
       <% not_taken = [] %>
       <% User.last.predictions.all.each do |p| taken << p.player_id end %>
-      <% Player.all.each do |p|; if !taken.include? p.id; not_taken << p.name; end; end %>
+      <% Player.order(:name).each do |p|; if !taken.include? p.id; not_taken << p.name; end; end %>
       <option value="">Player</option>
       <% not_taken.each do |n| %>
       <option value="<%= n %>"><%= n %></option>
@@ -25,7 +25,7 @@
     </select>
     <select name="team_name" required>
       <option value="">Team</option>
-      <% Team.all.each do |t| %>
+      <% Team.order(:name).each do |t| %>
       <option value="<%=t.name%>"><%= t.name %></option>
       <% end %>
     </select>

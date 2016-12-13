@@ -32,7 +32,7 @@ class UserController < ApplicationController
     end
   end
   
-  get '/users/:user_name' do
+  get '/users/:user_name/?' do
     @user = User.find_by id: session[:id]
     #binding.pry
     erb :'/users/home'
