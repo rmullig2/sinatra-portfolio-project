@@ -35,7 +35,6 @@ class UserController < ApplicationController
   end
   
   get '/users/:user_name' do
-    #@user = User.find_by params[:id]
     @user = User.find_by id: session[:id]
     #binding.pry
     erb :'/users/home'
