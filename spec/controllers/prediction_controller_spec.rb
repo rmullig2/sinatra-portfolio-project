@@ -19,6 +19,10 @@ describe PredictionController do
       expect(Prediction.last.player_id).to eq(player.id)
    end
     
+    it 'verifies prediction creation from web page' do
+      binding.pry
+    end
+    
   end
 
 end

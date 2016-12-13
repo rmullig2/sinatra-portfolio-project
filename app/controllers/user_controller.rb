@@ -37,5 +37,16 @@ class UserController < ApplicationController
     #inding.pry
     erb :'/users/home'
   end
+  
+  patch '/users/:user_name' do
+    #binding.pry
+    redirect to '/users/params[:user_name]'
+  end
+  
+  get '/logout' do
+    session.clear
+    binding.pry
+    redirect to '/'
+  end
 
 end
