@@ -15,4 +15,10 @@ class PredictionController < ApplicationController
     redirect to "/users/#{@user.user_name}"
   end
   
+  get '/users/:user_name/modify' do
+    @user = User.find_by id: session[:id]
+    #binding.pry
+    erb :'/predictions/modify'
+  end
+  
 end

@@ -25,9 +25,7 @@ class UserController < ApplicationController
   
   post '/login' do
     if logged_in?
-      #binding.pry
       session[:id] = @user.id
-      #binding.pry
       redirect to "/users/#{@user.user_name}"
     else
       redirect to '/login'
