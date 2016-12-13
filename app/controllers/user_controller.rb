@@ -26,6 +26,8 @@ class UserController < ApplicationController
   post '/login' do
     if logged_in?
       #binding.pry
+      session[:id] = @user.id
+      #binding.pry
       redirect to "/users/#{@user.user_name}"
     else
       redirect to '/login'
@@ -33,19 +35,15 @@ class UserController < ApplicationController
   end
   
   get '/users/:user_name' do
-    @user = User.find_by params[:id]
-    #inding.pry
-    erb :'/users/home'
-  end
-  
-  patch '/users/:user_name' do
+    #@user = User.find_by params[:id]
+    @user = User.find_by id: session[:id]
     #binding.pry
-    redirect to '/users/params[:user_name]'
+    erb :'/users/home'
   end
   
   get '/logout' do
     session.clear
-    binding.pry
+    #binding.pry
     redirect to '/'
   end
 

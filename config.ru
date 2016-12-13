@@ -8,6 +8,7 @@ end
 
 use Rack::MethodOverride
 use PlayerController
+use PredictionController
 use TeamController
 use UserController
 run ApplicationController
