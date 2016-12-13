@@ -4,6 +4,7 @@
 <%   contract = Contract.find_by id: p.contract_id %>
 <%   team = Team.find_by id: p.team_id %>
 <%=  player.rank %>. <%=player.name %> - <%= team.name %>: <%= contract.years %> years, $<%= contract.value %>
+<br>
 <% end %>
 <% if @user.predictions.empty? %>
 <h3><%= "You have not made any predictions yet!" %></h3>
@@ -13,9 +14,13 @@
 <form action="/users/<%= @user.user_name %>" method="post">
     <input id="hidden" type="hidden" name="_method" value="patch">
     <select name="player_name" required>
+      <% taken = [] %>
+      <% not_taken = [] %>
+      <% User.last.predictions.all.each do |p| taken << p.player_id end %>
+      <% Player.all.each do |p|; if !taken.include? p.id; not_taken << p.name; end; end %>
       <option value="">Player</option>
-      <% Player.all.each do |p| %>
-      <option value="<%=p.name%>"><%= p.name %></option>
+      <% not_taken.each do |n| %>
+      <option value="<%= n %>"><%= n %></option>
       <% end %>
     </select>
     <select name="team_name" required>
@@ -30,7 +35,7 @@
       <option value=<%=i%>><%= i %>
       <% end %>
     </select>
-    <input type="number" name="value" placeholder="Total Value" />
+    <input type="text" name="value" placeholder="Total Value" />
     <input type="submit" value="Predict">
 </form>
 <a href='/logout'>Logout</a>
