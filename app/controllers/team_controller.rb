@@ -6,9 +6,10 @@ class TeamController < ApplicationController
     erb :'/team/home'
   end
   
-  post '/team/detail' do
+  post '/team/home' do
     @team = Team.find_by name: params[:team_name]
-    binding.pry
+    #binding.pry
+    erb :'/team/detail'
   end
-
+  
 end

@@ -24,13 +24,4 @@ describe TeamController do
     
   end
   
-  describe 'Details Page' do
-
-    it 'loads the team details' do
-      get '/team/detail'
-      expect(last_response.status).to eq(200)
-    end
-    
-  end
-  
 end

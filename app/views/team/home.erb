@@ -1,4 +1,4 @@
-<form action="/team/detail" method="post">
+<form action="/team/home" method="post">
     <h2>American League</h2>
     <h3>East Division</h3>
         <% teams = Team.select { |t| t.league == "American" && t.division == "East" } %>
