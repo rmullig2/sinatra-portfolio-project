@@ -7,4 +7,7 @@ class AdminController < ApplicationController
     erb :'/admin/home'
   end
   
+  get '/admin/users' do
+  end
+  
 end
