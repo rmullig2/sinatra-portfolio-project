@@ -1,10 +1,14 @@
 <h2><%= @user.first_name %> <%= @user.last_name%></h2>
+<% preds = [] %>
 <% @user.predictions.each do |p| %>
 <%   player = Player.find_by id: p.player_id %>
 <%   contract = Contract.find_by id: p.contract_id %>
 <%   team = Team.find_by id: p.team_id %>
-<%=  player.rank %>. <%=player.name %> - <%= team.name %>: <%= contract.years %> years, $<%= contract.value %>
-<br>
+<%   preds << [player.rank, player.name, team.name, contract.years, contract.value] %>
+<% end %>
+<% preds.sort! { |a, b| a[0] <=> b[0] } %>
+<% preds.each do |p| %>
+<%=  p[0] %>. <%=p[1] %> - <%= p[2] %>: <%= p[3] %> years, $<%= p[4] %> million<br>
 <% end %>
 <% if @user.predictions.empty? %>
 <h3><%= "You have not made any predictions yet!" %></h3>
