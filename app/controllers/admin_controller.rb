@@ -27,6 +27,12 @@ class AdminController < ApplicationController
   end
   
   get '/admin/signings' do
+    @user = User.find_by id: session[:id]
+    if @user.id == 1
+        erb :'/admin/signings'
+    else
+      redirect to '/logout'
+    end
     binding.pry
   end
   

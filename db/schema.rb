@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 5) do
+ActiveRecord::Schema.define(version: 6) do
 
   create_table "contracts", force: :cascade do |t|
     t.integer "years"
@@ -29,6 +29,14 @@ ActiveRecord::Schema.define(version: 5) do
     t.integer  "contract_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "signings", force: :cascade do |t|
+    t.date    "signing_time"
+    t.integer "player_id"
+    t.integer "team_id"
+    t.integer "years"
+    t.float   "value"
   end
 
   create_table "teams", force: :cascade do |t|
