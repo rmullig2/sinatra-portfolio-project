@@ -50,5 +50,14 @@ describe AdminController do
     end
     
   end
+  
+  describe 'Opens the standings page' do
+    
+    it 'Opens a valid web page to view standings' do
+      get '/standings'
+      expect(last_response.status).to eq(200)
+    end
+    
+  end
 
 end

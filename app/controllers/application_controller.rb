@@ -16,6 +16,12 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
   
+  get '/standings' do
+    @standings = get_standings
+    erb :standings
+    #binding.pry
+  end
+  
   helpers do
     
     def valid_user?
@@ -77,6 +83,9 @@ class ApplicationController < Sinatra::Base
     def get_standings
         standings = []
         User.all.each do |u|
+          if u.id == 1
+            next
+          end
           score = 0
           u.predictions.each do |p|
             signed = Signing.find_by player_id: p.player_id
@@ -92,8 +101,6 @@ class ApplicationController < Sinatra::Base
           standings << [u.user_name, score]
         end
         standings
-      end
-              
     end
     
   end
