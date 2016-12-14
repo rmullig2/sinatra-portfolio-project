@@ -24,7 +24,10 @@ class AdminController < ApplicationController
     else
       redirect to '/logout'
     end
-    #binding.pry
+  end
+  
+  get '/admin/signings' do
+    binding.pry
   end
   
 end
