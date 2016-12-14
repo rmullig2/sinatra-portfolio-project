@@ -1,6 +1,8 @@
 <h3>Current signings</h3>
 <% Signing.all.each do |s| %>
-    
+    <% player = Player.find_by id: s.player_id %>
+    <% team = Team.find_by id: s.team_id %>
+    <%= player.name %> - <%= team.name %>: <%= s.years %> years, <%= s.value %>M  <%= s.signing_time %>
 <% end %>
 <h3>Enter a new signing</h3>
 <form action="/admin/signings<%= @user.user_name %>" method="post">
