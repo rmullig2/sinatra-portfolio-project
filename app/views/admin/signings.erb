@@ -3,6 +3,7 @@
     <% player = Player.find_by id: s.player_id %>
     <% team = Team.find_by id: s.team_id %>
     <%= player.name %> - <%= team.name %>: <%= s.years %> years, <%= s.value %>M  <%= s.signing_time %>
+    <br>
 <% end %>
 <h3>Enter a new signing</h3>
 <form action="/admin/signings" method="post">
@@ -61,3 +62,4 @@
     <input type="submit" value="Enter">
     </select>
 </form>
+<a href="/admin/home">Return to Admin page</a>

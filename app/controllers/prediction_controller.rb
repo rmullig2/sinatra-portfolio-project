@@ -26,6 +26,7 @@ class PredictionController < ApplicationController
     Prediction.update(prediction.id, :team_id => team.id)
     contract = Contract.find_by id: prediction.contract_id
     Contract.update(contract.id, :years => params[:years], :value => params[:value])
+    delete_late
     binding.pry
     redirect to "/users/#{@user.user_name}"
   end

@@ -59,6 +59,21 @@ class ApplicationController < Sinatra::Base
       end
     end
     
+    def admin_user?
+        @user.id == 1
+    end
+    
+    def delete_late
+        User.all.each do |u|
+          u.predictions.each do |p|
+            signed = Signing.find_by player_id: p.player_id
+            if !signed.nil? && signed.signing_time < p.created_at
+              p.destroy
+            end
+          end
+        end
+    end
+    
   end
 
 end

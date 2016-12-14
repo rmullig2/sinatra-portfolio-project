@@ -26,7 +26,8 @@ class UserController < ApplicationController
   post '/login' do
     if logged_in?
       session[:id] = @user.id
-      if session[:id] == 1
+      #if session[:id] == 1
+      if admin_user?
         redirect to "/admin/home"
       else
         redirect to "/users/#{@user.user_name}"
@@ -39,7 +40,8 @@ class UserController < ApplicationController
   get '/users/:user_name/?' do
     @user = User.find_by id: session[:id]
     #binding.pry
-    if session[:id] == 1
+    #if session[:id] == 1
+    if admin_user?
       redirect to "/admin/home"
     else
       erb :'/users/home'

@@ -17,6 +17,7 @@
       <% taken = [] %>
       <% not_taken = [] %>
       <% @user.predictions.all.each do |p| taken << p.player_id end %>
+      <% Signing.all.each do |s| taken << s.player_id end %>
       <% Player.order(:name).each do |p|; if !taken.include? p.id; not_taken << p.name; end; end %>
       <option value="">Player</option>
       <% not_taken.each do |n| %>
