@@ -16,4 +16,15 @@ class AdminController < ApplicationController
     end
   end
   
+  patch '/admin/users' do
+    @user = User.find_by id: session[:id]
+    if @user.id == 1
+        User.destroy(params[:user_id])
+        erb :'/admin/users'
+    else
+      redirect to '/logout'
+    end
+    #binding.pry
+  end
+  
 end

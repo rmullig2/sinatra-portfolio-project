@@ -39,7 +39,11 @@ class UserController < ApplicationController
   get '/users/:user_name/?' do
     @user = User.find_by id: session[:id]
     #binding.pry
-    erb :'/users/home'
+    if session[:id] == 1
+      redirect to "/admin/home"
+    else
+      erb :'/users/home'
+    end
   end
   
   get '/logout' do
