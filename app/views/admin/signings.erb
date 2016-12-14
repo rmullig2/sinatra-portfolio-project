@@ -1,0 +1,61 @@
+<h3>Current signings</h3>
+<% Signing.all.each do |s| %>
+    
+<% end %>
+<h3>Enter a new signing</h3>
+<form action="/admin/signings<%= @user.user_name %>" method="post">
+    <input id="hidden" type="hidden" name="_method" value="patch">
+    <select name="player_name" required>
+      <% taken = [] %>
+      <% not_taken = [] %>
+      <% Signing.all.each do |s| taken << s.player_id end %>
+      <% Player.order(:name).each do |p|; if !taken.include? p.id; not_taken << p.name; end; end %>
+      <option value="">Player</option>
+      <% not_taken.each do |n| %>
+      <option value="<%= n %>"><%= n %></option>
+      <% end %>
+    </select>
+    <select name="team_name" required>
+      <option value="">Team</option>
+      <% Team.order(:name).each do |t| %>
+      <option value="<%=t.name%>"><%= t.name %></option>
+      <% end %>
+    </select>
+    <select name="years">
+      <option value="">Years</option>
+      <% for i in 1..12 %>
+      <option value=<%=i%>><%= i %>
+      <% end %>
+    </select>
+    <input type="text" size="7" name="value" placeholder="Total Value" />
+    <select name="sign_year">
+      <option value="2016">2016
+      <option value="2017">2017
+    </select>
+    <select name="sign_month">
+      <option value="">Month</option>
+      <% for i in 1..12 %>
+      <option value=<%=i%>><%= i %>
+      <% end %>
+    </select>
+    <select name="sign_day">
+      <option value="">Day</option>
+      <% for i in 1..31 %>
+      <option value=<%=i%>><%= i %>
+      <% end %>
+    </select>
+    <select name="sign_hour">
+      <option value="">Hour</option>
+      <% for i in 0..23 %>
+      <option value=<%=i%>><%= i %>
+      <% end %>
+    </select>
+    <select name="sign_minute">
+      <option value="">Minute</option>
+      <% for i in 0..59 %>
+      <option value=<%=i%>><%= i %>
+      <% end %>
+    </select>
+    <input type="submit" value="Enter">
+    </select>
+</form>

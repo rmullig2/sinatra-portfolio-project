@@ -11,7 +11,6 @@ class PredictionController < ApplicationController
     @prediction = Prediction.create( { :user_id => @user.id, :player_id => @player.id,
                                        :team_id => @team.id, :contract_id => @contract.id } )
     @user.predictions << @prediction
-    binding.pry
     redirect to "/users/#{@user.user_name}"
   end
   

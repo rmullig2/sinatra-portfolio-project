@@ -1,4 +1,4 @@
-class Prediction < ActiveRecord::Base
+class Signing < ActiveRecord::Base
   
   validates :date, :player_id, :team_id, :years, :value, presence: true
   

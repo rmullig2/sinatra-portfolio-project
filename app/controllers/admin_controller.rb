@@ -33,7 +33,7 @@ class AdminController < ApplicationController
     else
       redirect to '/logout'
     end
-    binding.pry
+    #binding.pry
   end
   
 end
