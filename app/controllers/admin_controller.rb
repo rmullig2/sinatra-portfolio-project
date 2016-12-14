@@ -33,7 +33,17 @@ class AdminController < ApplicationController
     else
       redirect to '/logout'
     end
-    #binding.pry
+  end
+  
+  patch '/admin/signings' do
+    player =  Player.find_by name: params[:player_name]
+    team = Team.find_by name: params[:team_name]
+    years = params[:years].to_i
+    value = params[:value].to_f
+    time = Time.new(params[:sign_year].to_i, params[:sign_month].to_i,
+                    params[:sign_day].to_i, params[:sign_hour].to_i,
+                    params[:sign_minute].to_i)
+    binding.pry
   end
   
 end

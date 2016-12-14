@@ -5,7 +5,7 @@
     <%= player.name %> - <%= team.name %>: <%= s.years %> years, <%= s.value %>M  <%= s.signing_time %>
 <% end %>
 <h3>Enter a new signing</h3>
-<form action="/admin/signings<%= @user.user_name %>" method="post">
+<form action="/admin/signings" method="post">
     <input id="hidden" type="hidden" name="_method" value="patch">
     <select name="player_name" required>
       <% taken = [] %>
