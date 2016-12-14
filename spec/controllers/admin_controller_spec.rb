@@ -35,5 +35,20 @@ describe AdminController do
     end
 
   end
+  
+  describe 'Create signings' do
+    
+    it 'Can create a signing' do
+      player = Player.create(:name => "Justin Turner", :rank => 4)
+      team = Team.create(:name => "Los Angeles Dodgers", :league => "National", :division => "West")
+      years = 4
+      value = 65.5
+      time = DateTime.new(2016, 12, 8, 16, 45)
+      Signing.create(:player_id => player.id, :team_id => team.id, :years => years,
+                     :value => value, :signing_time => time)
+      expect(Signing.last.years).to eq(4)
+    end
+    
+  end
 
 end

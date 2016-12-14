@@ -32,11 +32,11 @@ ActiveRecord::Schema.define(version: 6) do
   end
 
   create_table "signings", force: :cascade do |t|
-    t.date    "signing_time"
-    t.integer "player_id"
-    t.integer "team_id"
-    t.integer "years"
-    t.float   "value"
+    t.datetime "signing_time"
+    t.integer  "player_id"
+    t.integer  "team_id"
+    t.integer  "years"
+    t.float    "value"
   end
 
   create_table "teams", force: :cascade do |t|
