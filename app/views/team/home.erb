@@ -1,8 +1,40 @@
-<h2>American League</h2>
-<h3>East Division</h3>
-<h3>Central Division</h3>
-<h3>West Division</h3>
-<h2>National League</h2>
-<h3>East Division</h3>
-<h3>Central Division</h3>
-<h3>West Division</h3>
+<form action="/team/detail" method="post">
+    <h2>American League</h2>
+    <h3>East Division</h3>
+        <% teams = Team.select { |t| t.league == "American" && t.division == "East" } %>
+        <% teams.each do |t| %>
+            <%= t.name %>
+            <input type="submit" name="<%= t.name %>" value="Signings" /><br>
+        <% end %>
+    <h3>Central Division</h3>
+        <% teams = Team.select { |t| t.league == "American" && t.division == "Central" } %>
+        <% teams.each do |t| %>
+            <%= t.name %>
+            <input type="submit" name="<%= t.name %>" value="Signings" /><br>
+        <% end %>
+    <h3>West Division</h3>
+        <% teams = Team.select { |t| t.league == "American" && t.division == "West" } %>
+        <% teams.each do |t| %>
+            <%= t.name %>
+            <input type="submit" name="<%= t.name %>" value="Signings" /><br>
+        <% end %>
+    <h2>National League</h2>
+    <h3>East Division</h3>
+        <% teams = Team.select { |t| t.league == "National" && t.division == "East" } %>
+        <% teams.each do |t| %>
+            <%= t.name %>
+            <input type="submit" name="<%= t.name %>" value="Signings" /><br>
+        <% end %>
+    <h3>Central Division</h3>
+        <% teams = Team.select { |t| t.league == "American" && t.division == "Central" } %>
+        <% teams.each do |t| %>
+            <%= t.name %>
+            <input type="submit" name="<%= t.name %>" value="Signings" /><br>
+        <% end %>
+    <h3>West Division</h3>
+        <% teams = Team.select { |t| t.league == "American" && t.division == "West" } %>
+        <% teams.each do |t| %>
+            <%= t.name %>
+            <input type="submit" name="<%= t.name %>" value="Signings" /><br>
+        <% end %>
+</form>
