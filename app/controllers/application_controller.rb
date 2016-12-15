@@ -17,6 +17,7 @@ class ApplicationController < Sinatra::Base
   end
   
   get '/standings' do
+    @user = User.find_by id: session[:id]
     @standings = get_standings
     erb :standings
     #binding.pry
