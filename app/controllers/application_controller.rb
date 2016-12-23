@@ -1,7 +1,7 @@
 require './config/environment'
 
 class ApplicationController < Sinatra::Base
-  
+
   register Sinatra::Flash
 
   configure do
@@ -10,21 +10,21 @@ class ApplicationController < Sinatra::Base
     enable :sessions
     set :session_secret, "MLBFreeAgents"
   end
-  
+
   get '/' do
     session[:fail] = ""
     erb :index
   end
-  
+
   get '/standings' do
     @user = User.find_by id: session[:id]
     @standings = get_standings
     erb :standings
     #binding.pry
   end
-  
+
   helpers do
-    
+
     def valid_user?
       user = User.find_by user_name: params[:user_name]
       if params[:first_name].empty?
@@ -47,29 +47,19 @@ class ApplicationController < Sinatra::Base
         true
       end
     end
-    
+
     def logged_in?
-      @user = User.find_by user_name: params[:user_name]
-      if params[:user_name].empty?
-        session[:fail] = "Please specify user name"
-        false
-      elsif @user.nil?
-        session[:fail] = "User name does not exist"
-        false
-      elsif @user.authenticate(params[:password]) == false
-        session[:fail] = "Incorrect password"
-        false
-      else
-        session[:fail] = ""
-        session[:id] = @user.id
-        true
-      end
+      !!current_user
     end
-    
+
+    def current_user
+      @current_user ||= User.find_by_id(session[:user_id]) unless session[:user_id] == nil
+    end
+
     def admin_user?
         @user.id == 1
     end
-    
+
     def delete_late
         User.all.each do |u|
           u.predictions.each do |p|
@@ -80,7 +70,7 @@ class ApplicationController < Sinatra::Base
           end
         end
     end
-    
+
     def get_standings
         standings = []
         User.all.each do |u|
@@ -104,7 +94,7 @@ class ApplicationController < Sinatra::Base
         standings
         #binding.pry
     end
-    
+
   end
 
 end

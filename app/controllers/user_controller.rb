@@ -1,20 +1,26 @@
 require './config/environment'
 
 class UserController < ApplicationController
-  
-  get '/signup/?' do
+
+  get '/signup' do
     @failure_message = session[:fail] || @failure_message = ""
     erb :'/users/create'
   end
-  
+
   post '/signup' do
-     if valid_user?
-        @user = User.create(params)
-        session[:id] = User.last.id
-        #binding.pry
-        redirect to "/users/#{@user.user_name}"
+     if !logged_in?
+       @user = User.new(params)
+       if @user.save
+         session[:user_id] = @user.id
+         flash[:notice] = 'User was successfully created!'
+         redirect to "/users/#{@user.user_name}"
+       else
+         flash[:notice] = @user.errors.full_messages
+         redirect to "/signup"
+       end
      else
-       redirect to '/signup'
+       flash[:notice] = 'You are already signed in'
+       redirect to "/users/#{current_user.user_name}"
      end
   end
 
@@ -22,7 +28,7 @@ class UserController < ApplicationController
     @failure_message = session[:fail] || @failure_message = ""
     erb :'/users/login'
   end
-  
+
   post '/login' do
     if logged_in?
       session[:id] = @user.id
@@ -36,7 +42,7 @@ class UserController < ApplicationController
       redirect to '/login'
     end
   end
-  
+
   get '/users/:user_name/?' do
     @user = User.find_by id: session[:id]
     #binding.pry
@@ -47,13 +53,13 @@ class UserController < ApplicationController
       erb :'/users/home'
     end
   end
-  
+
   get '/logout' do
     session.clear
     #binding.pry
     redirect to '/'
   end
-  
+
   get '/about' do
     erb :'/about'
   end

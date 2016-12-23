@@ -3,6 +3,12 @@
         <title>MLB Free Agents></title>
     </head>
     <body>
+        <% if !logged_in? %>
+          <h3><a href="/signup">Click here to sign up</a></h3>
+          <h3><a href="/login">Click here to login</a></h3>
+        <% else %>
+          <h3><a href="/about">Click here to learn about the website</a><h3>
+        <% end %>
         <%= yield %>
     </body>
 </html>
