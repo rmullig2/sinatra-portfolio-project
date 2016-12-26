@@ -68,15 +68,15 @@ class ApplicationController < Sinatra::Base
       score = 0
       user.predictions.each do |p|
         signed = Signing.find_by player_id: p.player_id
-          if !signed.nil?
-            if signed.team_id == p.team_id
-              score += 20
-            end
-            contract = Contract.find_by id: p.contract_id
-            score += 10 -  2 * (signed.years - contract.years).abs
-            score += 10 - ((signed.value - contract.value).abs).round
+        if !signed.nil?
+          if signed.team_id == p.team_id
+            score += 20
           end
+          contract = Contract.find_by id: p.contract_id
+          score += 10 -  2 * (signed.years - contract.years).abs
+          score += 10 - ((signed.value - contract.value).abs).round
         end
+      end
       score
     end
     
@@ -93,12 +93,8 @@ class ApplicationController < Sinatra::Base
     
     def not_taken
       taken, free = [], []
-      current_user.predictions.all.each do |p|
-        taken << p.player_id
-      end
-      Signing.all.each do |s|
-        taken << s.player_id
-      end
+      current_user.predictions.all.each { |p| taken << p.player_id }
+      Signing.all.each {|s| taken << s.player_id }
       Player.order(:name).each do |p|
         if !taken.include? p.id
           free << p.name
