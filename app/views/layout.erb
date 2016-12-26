@@ -10,9 +10,7 @@
           <h3><a href="/about">Click here to learn about the website</a><h3>
           <h3><a href="/users/<%= current_user.user_name %>">Go to my page</a></h3>
         <% end %>
-        <% if flash[:notice] %>
-            <%= flash[:notice] %>
-        <% end %>
+        <%= flash[:notice] %>
         <%= yield %>
     </body>
 </html>
