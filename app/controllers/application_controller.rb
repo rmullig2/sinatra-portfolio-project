@@ -56,23 +56,14 @@ class ApplicationController < Sinatra::Base
     def get_standings
         standings = []
         User.all.each do |u|
-          if u.id == 1
-            next
-          end
-          #score = 0
-          #u.predictions.each do |p|
-          #  signed = Signing.find_by player_id: p.player_id
-          #  if !signed.nil?
-          #    if signed.team_id == p.team_id
-          #      score += 20
-          #    end
-          #    contract = Contract.find_by id: p.contract_id
-          #    score += 10 -  2 * (signed.years - contract.years).abs
-          #    score += 10 - ((signed.value - contract.value).abs).round
-          #  end
+          #binding.pry
+          #if u.admin
+          #  next
           #end
-          score = get_score(u)
-          standings << [score, u.user_name]
+          if !u.admin
+            score = get_score(u)
+            standings << [score, u.user_name]
+          end
           #binding.pry
         end
         #binding.pry
