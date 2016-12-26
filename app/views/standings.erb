@@ -1,8 +1,8 @@
-<% sorted = @standings.sort {|a,b| a[0] <=> b[0]} %>
+<% sorted = @standings.sort.reverse {|a,b| a[0] <=> b[0]} %>
 <h1>Current Standings</h1>
 <% i = 1 %>
 <% sorted.each do |s| %>
-<h2><%=i%>. <%=s[0]%> - <%=s[1]%> points<br></h2>
+<h2><%=i%>. <%=s[1]%> - <%=s[0]%> points<br></h2>
 <% i+= 1 %>
 <% end %>
 <a href="/users/<%=current_user.user_name%>">Return to your page</a>

@@ -59,22 +59,40 @@ class ApplicationController < Sinatra::Base
           if u.id == 1
             next
           end
-          score = 0
-          u.predictions.each do |p|
-            signed = Signing.find_by player_id: p.player_id
-            if !signed.nil?
-              if signed.team_id == p.team_id
-                score += 20
-              end
-              contract = Contract.find_by id: p.contract_id
-              score += 10 -  2 * (signed.years - contract.years).abs
-              score += 10 - ((signed.value - contract.value).abs).round
-            end
-          end
-          standings << [u.user_name, score]
+          #score = 0
+          #u.predictions.each do |p|
+          #  signed = Signing.find_by player_id: p.player_id
+          #  if !signed.nil?
+          #    if signed.team_id == p.team_id
+          #      score += 20
+          #    end
+          #    contract = Contract.find_by id: p.contract_id
+          #    score += 10 -  2 * (signed.years - contract.years).abs
+          #    score += 10 - ((signed.value - contract.value).abs).round
+          #  end
+          #end
+          score = get_score(u)
+          standings << [score, u.user_name]
+          #binding.pry
         end
-        standings
         #binding.pry
+        standings
+    end
+    
+    def get_score(user)
+      score = 0
+      user.predictions.each do |p|
+        signed = Signing.find_by player_id: p.player_id
+          if !signed.nil?
+            if signed.team_id == p.team_id
+              score += 20
+            end
+            contract = Contract.find_by id: p.contract_id
+            score += 10 -  2 * (signed.years - contract.years).abs
+            score += 10 - ((signed.value - contract.value).abs).round
+          end
+        end
+      score
     end
 
   end
