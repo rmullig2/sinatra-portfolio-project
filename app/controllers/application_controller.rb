@@ -1,13 +1,13 @@
 require './config/environment'
+require 'sinatra/flash'
 
 class ApplicationController < Sinatra::Base
-
-  register Sinatra::Flash
-
+  
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
+    register Sinatra::Flash
     set :session_secret, "MLBFreeAgents"
   end
 
@@ -26,26 +26,8 @@ class ApplicationController < Sinatra::Base
   helpers do
 
     def valid_user?
-      user = User.find_by user_name: params[:user_name]
-      if params[:first_name].empty?
-        session[:fail] = "Please specify first name"
-        false
-      elsif params[:last_name].empty?
-        session[:fail] = "Please specify last name"
-        false
-      elsif params[:user_name].empty?
-        session[:fail] = "Please specify login name"
-        false
-      elsif user != nil
-        session[:fail] = "That user name has already been selected"
-        false
-      elsif params[:password].empty?
-        session[:fail] = "Please specify password"
-        false
-      else
-        session[:fail] = ""
-        true
-      end
+      @user = User.find_by(:user_name => params[:user_name])
+      @user && @user.authenticate(params[:password])
     end
 
     def logged_in?
@@ -56,9 +38,9 @@ class ApplicationController < Sinatra::Base
       @current_user ||= User.find_by_id(session[:user_id]) unless session[:user_id] == nil
     end
 
-    def admin_user?
-        @user.id == 1
-    end
+    #def admin_user?
+    #    @user.id == 1
+    #end
 
     def delete_late
         User.all.each do |u|

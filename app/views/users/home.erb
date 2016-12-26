@@ -1,6 +1,6 @@
-<h2><%= @user.first_name %> <%= @user.last_name%></h2>
+<h2><%= current_user.first_name %> <%= current_user.last_name%></h2>
 <% preds = [] %>
-<% @user.predictions.each do |p| %>
+<% current_user.predictions.each do |p| %>
 <%   player = Player.find_by id: p.player_id %>
 <%   contract = Contract.find_by id: p.contract_id %>
 <%   team = Team.find_by id: p.team_id %>
@@ -10,17 +10,17 @@
 <% preds.each do |p| %>
 <%=  p[0] %>. <%=p[1] %> - <%= p[2] %>: <%= p[3] %> years, $<%= p[4] %> million<br>
 <% end %>
-<% if @user.predictions.empty? %>
+<% if current_user.predictions.empty? %>
 <h3><%= "You have not made any predictions yet!" %></h3>
 <% end %>
 <br><br>
 <h3>Predict more signings</h3>
-<form action="/users/<%= @user.user_name %>" method="post">
+<form action="/users/<%= current_user.user_name %>" method="post">
     <input id="hidden" type="hidden" name="_method" value="patch">
     <select name="player_name" required>
       <% taken = [] %>
       <% not_taken = [] %>
-      <% @user.predictions.all.each do |p| taken << p.player_id end %>
+      <% current_user.predictions.all.each do |p| taken << p.player_id end %>
       <% Signing.all.each do |s| taken << s.player_id end %>
       <% Player.order(:name).each do |p|; if !taken.include? p.id; not_taken << p.name; end; end %>
       <option value="">Player</option>
@@ -43,7 +43,7 @@
     <input type="text" name="value" placeholder="Total Value" />
     <input type="submit" value="Predict">
 </form>
-<a href="/users/<%= @user.user_name %>/modify">Change my predictions</a><br>
+<a href="/users/<%= current_user.user_name %>/modify">Change my predictions</a><br>
 <a href="/standings">Click here to current standings</a><br>
 <a href="/team/home">Click here to view teams</a><br>
 <a href='/logout'>Logout</a>
