@@ -38,9 +38,9 @@ class ApplicationController < Sinatra::Base
       @current_user ||= User.find_by_id(session[:user_id]) unless session[:user_id] == nil
     end
 
-    #def admin_user?
-    #    @user.id == 1
-    #end
+    def admin_user?
+        @user.admin
+    end
 
     def delete_late
         User.all.each do |u|

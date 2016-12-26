@@ -36,11 +36,11 @@ class UserController < ApplicationController
       session[:user_id] = @user.id
       #binding.pry
       #if session[:id] == 1
-      #if admin_user?
-      #  redirect to "/admin/home"
-      #else
-      redirect to "/users/#{@user.user_name}"
-      #end
+      if admin_user?
+        redirect to "/admin/home"
+      else
+        redirect to "/users/#{@user.user_name}"
+      end
     else
       flash[:notice] = "Invalid username or password"
       redirect to '/login'
