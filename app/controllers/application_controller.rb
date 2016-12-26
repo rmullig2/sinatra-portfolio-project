@@ -56,17 +56,11 @@ class ApplicationController < Sinatra::Base
     def get_standings
         standings = []
         User.all.each do |u|
-          #binding.pry
-          #if u.admin
-          #  next
-          #end
           if !u.admin
             score = get_score(u)
             standings << [score, u.user_name]
           end
-          #binding.pry
         end
-        #binding.pry
         standings
     end
     
@@ -84,6 +78,17 @@ class ApplicationController < Sinatra::Base
           end
         end
       score
+    end
+    
+    def predictions
+      preds = []
+      current_user.predictions.each do |p|
+        player = Player.find_by id: p.player_id
+        contract = Contract.find_by id: p.contract_id
+        team = Team.find_by id: p.team_id
+        preds << [player.rank, player.name, team.name, contract.years, contract.value]
+      end
+      preds
     end
 
   end

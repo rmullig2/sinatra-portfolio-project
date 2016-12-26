@@ -25,17 +25,12 @@ class UserController < ApplicationController
   end
 
   get '/login/?' do
-    #@failure_message = session[:fail] || @failure_message = ""
     erb :'/users/login'
   end
 
   post '/login' do
-    #binding.pry
     if valid_user?
-      #session[:id] = @user.id
       session[:user_id] = @user.id
-      #binding.pry
-      #if session[:id] == 1
       if admin_user?
         redirect to "/admin/home"
       else
@@ -48,15 +43,7 @@ class UserController < ApplicationController
   end
 
   get '/users/:user_name/?' do
-    #@user = User.find_by id: session[:id]
-    #@user = current_user
-    #if session[:id] == 1
-    #if admin_user?
-    #  redirect to "/admin/home"
-    #else
-    #binding.pry
     erb :'/users/home'
-    #end
   end
 
   get '/logout' do
