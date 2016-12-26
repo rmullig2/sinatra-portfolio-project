@@ -11,11 +11,6 @@
 <form action="/users/<%= current_user.user_name %>" method="post">
     <input id="hidden" type="hidden" name="_method" value="patch">
     <select name="player_name" required>
-      <% taken = [] %>
-      <% not_taken = [] %>
-      <% current_user.predictions.all.each do |p| taken << p.player_id end %>
-      <% Signing.all.each do |s| taken << s.player_id end %>
-      <% Player.order(:name).each do |p|; if !taken.include? p.id; not_taken << p.name; end; end %>
       <option value="">Player</option>
       <% not_taken.each do |n| %>
       <option value="<%= n %>"><%= n %></option>

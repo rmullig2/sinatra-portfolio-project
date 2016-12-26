@@ -90,6 +90,22 @@ class ApplicationController < Sinatra::Base
       end
       preds
     end
+    
+    def not_taken
+      taken, free = [], []
+      current_user.predictions.all.each do |p|
+        taken << p.player_id
+      end
+      Signing.all.each do |s|
+        taken << s.player_id
+      end
+      Player.order(:name).each do |p|
+        if !taken.include? p.id
+          free << p.name
+        end
+      end
+      free
+    end
 
   end
 
