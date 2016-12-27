@@ -2,3 +2,19 @@ body {
     background-image: url("/images/background.jpg");
     background-size: 100%;
 }
+
+#signup {
+    color: #111;
+    font-size: 32px;
+    position: relative;
+    left: 20%;
+    top: 65%;
+}
+
+#login {
+    color: #111;
+    font-size: 32px;
+    position:  relative;
+    left: 60%;
+    top: 56%;
+}
