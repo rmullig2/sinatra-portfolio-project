@@ -1,4 +1,5 @@
-<h3>Current signings</h3>
+<h3 style="position: relative; top: 5%; text-align: center; font-size: 200%;">Current signings</h3>
+<form style="position: relative; top: 8%; text-align: center; font-size: 140%;" action="/login" method="post">
 <% Signing.all.each do |s| %>
     <% player = Player.find_by id: s.player_id %>
     <% team = Team.find_by id: s.team_id %>
@@ -62,4 +63,3 @@
     <input type="submit" value="Enter">
     </select>
 </form>
-<a href="/admin/home">Return to Admin page</a>

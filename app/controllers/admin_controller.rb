@@ -9,6 +9,7 @@ class AdminController < ApplicationController
   
   get '/admin/users' do
     @user = User.find_by id: session[:id]
+    #binding.pry
     if admin_user?
         erb :'/admin/users'
     else

@@ -8,10 +8,12 @@
           <p id="signup"><a href="/signup">Click here to sign up</a></p>
           <p id="login"><a href="/login">Click here to login</a></p>
         <% else %>
-          <h3><a href="/about">Click here to learn about the website</a><h3>
-          <h3><a href="/users/<%= current_user.user_name %>">Go to my page</a></h3>
+          <p id="learn"><nobr><a href="/about">Click here to learn about the website</a></nobr></p>
+          <p id="mypage"><a href="/users/<%= current_user.user_name %>">Go to my page</a></p>
         <% end %>
-        <%= flash[:notice] %>
+        <div class="flash">
+            <%= flash[:notice] %>
+        </div>
         <%= yield %>
     </body>
 </html>

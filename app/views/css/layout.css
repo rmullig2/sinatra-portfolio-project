@@ -18,3 +18,28 @@ body {
     left: 60%;
     top: 56%;
 }
+
+#learn {
+    color: #111;
+    font-size: 32px;
+    position: absolute;
+    left: 10%;
+    bottom: 10%;
+}
+
+#mypage {
+    color: #111;
+    font-size: 32px;
+    position:  absolute;
+    left: 60%;
+    bottom: 10%;
+}
+
+.flash{
+  width: 250px;
+  padding: 5px;
+  font-weight: bold;
+  margin: 20px;
+  background:#ddd;
+  color:#666;border:1px solid #ccc;
+}

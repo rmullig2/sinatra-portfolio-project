@@ -48,7 +48,11 @@ class UserController < ApplicationController
   end
 
   get '/users/:user_name/?' do
-    erb :'/users/home'
+    if admin_user?
+      redirect to "/admin/home"
+    else
+      erb :'/users/home'
+    end
   end
 
   get '/logout' do

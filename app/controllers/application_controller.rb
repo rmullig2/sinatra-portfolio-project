@@ -39,7 +39,7 @@ class ApplicationController < Sinatra::Base
     end
 
     def admin_user?
-        @user.admin
+        current_user.admin
     end
 
     def delete_late
