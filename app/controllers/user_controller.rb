@@ -25,7 +25,12 @@ class UserController < ApplicationController
   end
 
   get '/login/?' do
-    erb :'/users/login'
+    if logged_in?
+      flash[:notice] = 'You are already signed in'
+      redirect to "/users/#{current_user.user_name}"
+    else
+      erb :'/users/login'
+    end
   end
 
   post '/login' do

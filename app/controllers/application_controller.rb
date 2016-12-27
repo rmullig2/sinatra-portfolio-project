@@ -43,25 +43,25 @@ class ApplicationController < Sinatra::Base
     end
 
     def delete_late
-        User.all.each do |u|
-          u.predictions.each do |p|
-            signed = Signing.find_by player_id: p.player_id
-            if !signed.nil? && signed.signing_time < p.created_at
-              p.destroy
-            end
+      User.all.each do |u|
+        u.predictions.each do |p|
+          signed = Signing.find_by player_id: p.player_id
+          if !signed.nil? && signed.signing_time < p.created_at
+            p.destroy
           end
         end
+      end
     end
 
     def get_standings
-        standings = []
-        User.all.each do |u|
-          if !u.admin
-            score = get_score(u)
-            standings << [score, u.user_name]
-          end
+      standings = []
+      User.all.each do |u|
+        if !u.admin
+          score = get_score(u)
+          standings << [score, u.user_name]
         end
-        standings
+      end
+      standings
     end
     
     def get_score(user)
