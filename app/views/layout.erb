@@ -11,9 +11,11 @@
           <p id="learn"><nobr><a href="/about">Click here to learn about the website</a></nobr></p>
           <p id="mypage"><a href="/users/<%= current_user.user_name %>">Go to my page</a></p>
         <% end %>
-        <div class="flash">
-            <%= flash[:notice] %>
-        </div>
+        <% if flash[:notice] %>
+            <div class="flash">
+                <%= flash[:notice] %>
+            </div>
+        <% end %>
         <%= yield %>
     </body>
 </html>
