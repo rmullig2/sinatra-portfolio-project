@@ -3,13 +3,10 @@ require './config/environment'
 class AdminController < ApplicationController
   
   get '/admin/home' do
-    @user = User.find_by id: session[:id]
     erb :'/admin/home'
   end
   
   get '/admin/users' do
-    @user = User.find_by id: session[:id]
-    #binding.pry
     if admin_user?
         erb :'/admin/users'
     else
@@ -18,7 +15,6 @@ class AdminController < ApplicationController
   end
   
   patch '/admin/users' do
-    @user = User.find_by id: session[:id]
     if admin_user?
         User.destroy(params[:user_id])
         erb :'/admin/users'
@@ -28,7 +24,7 @@ class AdminController < ApplicationController
   end
   
   get '/admin/signings' do
-    @user = User.find_by id: session[:id]
+#    @user = User.find_by id: session[:id]
     if admin_user?
         erb :'/admin/signings'
     else
