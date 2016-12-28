@@ -3,7 +3,6 @@ require './config/environment'
 class UserController < ApplicationController
 
   get '/signup' do
-    @failure_message = session[:fail] || @failure_message = ""
     erb :'/users/create'
   end
 
