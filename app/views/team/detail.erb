@@ -1,8 +1,10 @@
 <h1>Free Agent Signings for the <%= @team.name %></h1>
 <% Signing.all.each do |s| %>
   <% if s.team_id == @team.id %>
-    <% player = Player.find_by id: s.player_id %>
-    <%= player.name %>: <%= s.years %> years, <%= s.value %> million<br>
+    <h3><% player = Player.find_by id: s.player_id %>
+    <%= player.name %>: <%= s.years %> years, <%= s.value %> million<br></h3>
   <% end %>
 <% end %>
-<a href="/users/<%=@user.user_name%>">Return to your page</a>
+<div style="position: relative; text-align: left; font-size: 150%;">
+  <a href="/team/home">Return to team listings</a><br>
+</div>

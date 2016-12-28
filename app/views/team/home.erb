@@ -1,35 +1,38 @@
 <form action="/team/home" method="post">
-    <h2>American League</h2>
-    <h3>East Division</h3>
+    <div style="float: left; margin: 0 0 0 20%;">
+    <h1>American League</h1>
+    <h2>East Division</h2>
         <% teams = Team.select { |t| t.league == "American" && t.division == "East" } %>
         <% teams.each do |t| %>
             <input type="submit" name="team_name" value="<%= t.name %>" /><br>
         <% end %>
-    <h3>Central Division</h3>
+    <h2>Central Division</h2>
         <% teams = Team.select { |t| t.league == "American" && t.division == "Central" } %>
         <% teams.each do |t| %>
             <input type="submit" name="team_name" value="<%= t.name %>" /><br>
         <% end %>
-    <h3>West Division</h3>
+    <h2>West Division</h2>
         <% teams = Team.select { |t| t.league == "American" && t.division == "West" } %>
         <% teams.each do |t| %>
             <input type="submit" name="team_name" value="<%= t.name %>" /><br>
         <% end %>
-    <h2>National League</h2>
-    <h3>East Division</h3>
+    </div>
+    <div style="float: right; margin: 0 20% 0 0;">
+    <h1>National League</h1>
+    <h2>East Division</h2>
         <% teams = Team.select { |t| t.league == "National" && t.division == "East" } %>
         <% teams.each do |t| %>
             <input type="submit" name="team_name" value="<%= t.name %>" /><br>
         <% end %>
-    <h3>Central Division</h3>
+    <h2>Central Division</h2>
         <% teams = Team.select { |t| t.league == "American" && t.division == "Central" } %>
         <% teams.each do |t| %>
             <input type="submit" name="team_name" value="<%= t.name %>" /><br>
         <% end %>
-    <h3>West Division</h3>
+    <h2>West Division</h2>
         <% teams = Team.select { |t| t.league == "American" && t.division == "West" } %>
         <% teams.each do |t| %>
             <input type="submit" name="team_name" value="<%= t.name %>" /><br>
         <% end %>
+    </div>
 </form>
-<a href="/users/<%=@user.user_name%>">Return to your page</a>
