@@ -24,7 +24,6 @@ class AdminController < ApplicationController
   end
   
   get '/admin/signings' do
-#    @user = User.find_by id: session[:id]
     if admin_user?
         erb :'/admin/signings'
     else

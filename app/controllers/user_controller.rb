@@ -38,7 +38,7 @@ class UserController < ApplicationController
       if admin_user?
         redirect to "/admin/home"
       else
-        redirect to "/users/#{@user.user_name}"
+        redirect to "/users/#{current_user.user_name}"
       end
     else
       flash[:notice] = "Invalid username or password"
@@ -47,10 +47,14 @@ class UserController < ApplicationController
   end
 
   get '/users/:user_name/?' do
-    if admin_user?
-      redirect to "/admin/home"
+    if current_user.user_name == params[:user_name]
+      if admin_user?
+        redirect to "/admin/home"
+      else
+        erb :'/users/home'
+      end
     else
-      erb :'/users/home'
+      redirect to '/logout'
     end
   end
 
