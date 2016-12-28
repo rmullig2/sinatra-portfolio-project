@@ -1,12 +1,12 @@
-<h2>Modify your predictions, <%= @user.first_name %> <%= @user.last_name%></h2>
-<% @user.predictions.each do |p| %>
+<h1>Modify your predictions, <%= current_user.first_name %> <%= current_user.last_name%></h1>
+<% current_user.predictions.each do |p| %>
 <%   player = Player.find_by id: p.player_id %>
 <%   contract = Contract.find_by id: p.contract_id %>
 <%   team = Team.find_by id: p.team_id %>
 <!-- <%=  player.rank %>. <%=player.name %> - <%= team.name %>: <%= contract.years %> years, $<%= contract.value %> -->
 <br>
 
-<form action="/users/<%= @user.user_name %>/modify" method="post">
+<form action="/users/<%= current_user.user_name %>/modify" method="post">
     <input id="hidden" type="hidden" name="_method" value="patch">
     <input type="hidden" name="prediction_id" value="<%= p.id %>" />
     <%   player = Player.find_by id: p.player_id %>
@@ -34,4 +34,3 @@
     <input type="submit" value="Change">
 </form>
 <% end %>
-<a href="/users/<%=@user.user_name%>">Return to your page</a>

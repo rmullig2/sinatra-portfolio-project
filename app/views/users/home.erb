@@ -1,4 +1,5 @@
-<h2 style="text-align: center"><%= current_user.first_name %> <%= current_user.last_name%></h2>
+<h1 style="text-align: center"><%= current_user.first_name %> <%= current_user.last_name%></h1>
+<div style="position: relative; text-align: left; font-size: 130%;">
 <% preds = predictions.sort { |a, b| a[0] <=> b[0] } %>
 <% preds.each do |p| %>
 <%=  p[0] %>. <%=p[1] %> - <%= p[2] %>: <%= p[3] %> years, $<%= p[4] %> million<br>
@@ -6,6 +7,7 @@
 <% if current_user.predictions.empty? %>
 <h3><%= "You have not made any predictions yet!" %></h3>
 <% end %>
+</div>
 <br><br>
 <h3>Predict more signings</h3>
 <form action="/users/<%= current_user.user_name %>" method="post">
@@ -31,7 +33,9 @@
     <input type="text" name="value" placeholder="Total Value" />
     <input type="submit" value="Predict">
 </form>
+<div style="position: relative; text-align: left; font-size: 150%;">
 <a href="/users/<%= current_user.user_name %>/modify">Change my predictions</a><br>
 <a href="/standings">Click here to current standings</a><br>
 <a href="/team/home">Click here to view teams</a><br>
 <a href='/logout'>Logout</a>
+</div>
